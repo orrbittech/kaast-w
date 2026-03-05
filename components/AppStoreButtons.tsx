@@ -7,7 +7,7 @@ export function AppStoreButtons() {
   return (
     <section className="bg-base py-12">
       <div className="mx-auto max-w-4xl px-6 text-center">
-        <p className="font-display mb-6 text-lg font-semibold text-zinc-300 md:text-xl">
+        <p className="font-display mb-6 text-lg font-semibold text-zinc-200 md:text-xl">
           Launch from your phone and connect to multiple locations and devices.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
@@ -17,9 +17,11 @@ export function AppStoreButtons() {
           >
             <Image
               src="/icons/google.png"
-              alt="Google Play"
+              alt="Download KAAST on Google Play"
               width={32}
               height={32}
+              priority
+              sizes="32px"
             />
             <span className="font-display font-semibold">Google Play</span>
           </a>
@@ -29,9 +31,11 @@ export function AppStoreButtons() {
           >
             <Image
               src="/icons/apple.png"
-              alt="App Store"
+              alt="Download KAAST on the App Store"
               width={32}
               height={32}
+              priority
+              sizes="32px"
             />
             <span className="font-display font-semibold">App Store</span>
           </a>

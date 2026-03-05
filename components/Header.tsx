@@ -18,7 +18,10 @@ export function Header() {
             <span className="text-lg font-bold tracking-wide text-white">KAAST</span>
           </Link>
 
-          <nav className="hidden items-center gap-2 rounded-full bg-zinc-900 px-2 py-1 md:flex">
+          <nav
+            aria-label="Main navigation"
+            className="hidden items-center gap-2 rounded-full bg-zinc-900 px-2 py-1 md:flex"
+          >
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
@@ -32,6 +35,7 @@ export function Header() {
 
           <a
             href="#download"
+            aria-label="Download KAAST app"
             className="cursor-pointer rounded-full bg-white px-6 py-2 text-sm font-semibold text-black transition-transform hover:scale-[1.02]"
           >
             Download

@@ -32,6 +32,16 @@ const FAQ_ITEMS = [
     answer:
       "We offer support to help you get the most out of KAAST. Reach out through the app or our website for assistance.",
   },
+  {
+    question: "Is KAAST available in South Africa?",
+    answer:
+      "Yes. KAAST is a South African solution built by Orrbit Systems. It is designed for local SMEs with affordable pricing and cloud-based access from mobile, web, and TV.",
+  },
+  {
+    question: "Who developed KAAST?",
+    answer:
+      "KAAST was developed by Brandon N NKawu and is a product of Orrbit Systems, a premier digital solutions provider in South Africa. Contact: 073 959 0288 or LinkedIn.",
+  },
 ];
 
 export function FAQ() {
@@ -53,12 +63,15 @@ export function FAQ() {
                 type="button"
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="flex w-full cursor-pointer items-center justify-between px-6 py-4 text-left"
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-answer-${index}`}
+                id={`faq-question-${index}`}
               >
                 <span className="font-display font-semibold text-white">
                   {item.question}
                 </span>
                 <span
-                  className={`ml-4 text-2xl text-zinc-300 transition-transform ${
+                  className={`ml-4 text-2xl text-zinc-200 transition-transform ${
                     openIndex === index ? "rotate-45" : ""
                   }`}
                 >
@@ -66,8 +79,13 @@ export function FAQ() {
                 </span>
               </button>
               {openIndex === index && (
-                <div className="border-t border-zinc-700 px-6 py-4">
-                  <p className="font-display text-sm text-zinc-300">
+                <div
+                  id={`faq-answer-${index}`}
+                  role="region"
+                  aria-labelledby={`faq-question-${index}`}
+                  className="border-t border-zinc-700 px-6 py-4"
+                >
+                  <p className="font-display text-sm text-zinc-200">
                     {item.answer}
                   </p>
                 </div>

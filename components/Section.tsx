@@ -83,6 +83,9 @@ export function Section() {
             </p>
           </div>
         </div>
+        <p className="mt-12 text-center text-sm text-zinc-400">
+          Simple, affordable South African solution for SMEs. Cloud-based. Mobile, web & TV.
+        </p>
       </div>
     </section>
   );

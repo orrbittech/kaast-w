@@ -10,9 +10,16 @@ export interface OnboardingSlide {
 
 /** Onboarding slides - meaningful statements for the landing page. */
 export const SLIDES: OnboardingSlide[] = [
-  { title: "Take full control of every business screen", highlight: "KAAST" },
-  { title: "Install KAAST on your phone to control TV Player apps" },
-  { title: "Use smart or compatible TVs running KAAST TV Player" },
-  { title: "Stop content chaos and move faster" },
-  { title: "Launch in minutes and scale with confidence" },
+  {
+    title: "Take full control. Manage every screen from your fingertips",
+    highlight: "KAAST",
+  },
+  { title: "Keep your brand locked in across every display" },
+  {
+    title: "Run promotions, playlists, and updates on every screen right from your phone",
+  },
+  {
+    title: "Small businesses get fast, simple management that scales across stores and franchises",
+  },
+  { title: "Take take charge get sarted now", highlight: "KAAST" },
 ];

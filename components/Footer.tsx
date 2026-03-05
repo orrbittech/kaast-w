@@ -8,18 +8,27 @@ export function Footer() {
         >
           Start running screens from your phone
         </a>
-        <p className="font-display mt-6 text-sm text-zinc-400">
+        <p className="font-display mt-6 text-sm text-zinc-300">
           If you can download apps, you can run KAAST.
         </p>
-        <p className="font-display mt-3 text-xs text-zinc-500">
-          KAAST is a sub-division of Orrbit Systems.{" "}
+        <p className="font-display mt-3 text-xs text-zinc-400">
+          KAAST is a product of{" "}
           <a
             href="https://www.orrbit.co.za/"
             target="_blank"
             rel="noreferrer"
             className="cursor-pointer text-primary hover:underline"
           >
-            Visit Orrbit
+            Orrbit Systems
+          </a>
+          .{" "}
+          <a
+            href="https://x.com/orrbittech"
+            target="_blank"
+            rel="noreferrer"
+            className="cursor-pointer text-primary hover:underline"
+          >
+            X
           </a>
         </p>
       </div>

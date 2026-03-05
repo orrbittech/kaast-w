@@ -42,7 +42,7 @@ export function HowItWorks() {
               <h3 className="font-display mb-2 text-xl font-semibold text-white">
                 {step.title}
               </h3>
-              <p className="font-display text-sm text-zinc-300">
+              <p className="font-display text-sm text-zinc-200">
                 {step.description}
               </p>
             </div>
