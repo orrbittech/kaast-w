@@ -19,7 +19,10 @@
   --color-primary-muted: var(--primary-muted);
   --color-approve: var(--approve);
   --font-sans: var(--font-urbanist), "Urbanist", system-ui, sans-serif;
-  --font-display: var(--font-indie), "Indie Flower", "Urbanist", system-ui, sans-serif;
+}
+
+.font-caveat {
+  font-family: var(--font-caveat), "Caveat", cursive;
 }
 
 body {

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Urbanist, Indie_Flower } from "next/font/google";
+import { Urbanist, Caveat } from "next/font/google";
 import "./globals.css";
 
 const urbanist = Urbanist({
@@ -9,11 +9,11 @@ const urbanist = Urbanist({
   variable: "--font-urbanist",
 });
 
-const indieFlower = Indie_Flower({
-  weight: "400",
+const caveat = Caveat({
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   display: "optional",
-  variable: "--font-indie",
+  variable: "--font-caveat",
 });
 
 const SITE_URL = "https://kaast.app";
@@ -136,7 +136,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-ZA"
-      className={`${urbanist.variable} ${indieFlower.variable}`}
+      className={`${urbanist.variable} ${caveat.variable}`}
     >
       <head>
         <script

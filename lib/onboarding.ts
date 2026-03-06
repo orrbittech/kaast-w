@@ -21,5 +21,5 @@ export const SLIDES: OnboardingSlide[] = [
   {
     title: "Small businesses get fast, simple management that scales across stores and franchises",
   },
-  { title: "Take take charge get sarted now", highlight: "KAAST" },
+  { title: "Take charge and get started now", highlight: "KAAST" },
 ];

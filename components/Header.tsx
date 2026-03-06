@@ -15,7 +15,7 @@ export function Header() {
       <div className="mx-auto max-w-5xl px-6">
         <div className="flex h-16 items-center justify-between rounded-full border border-zinc-800 bg-black px-6 shadow-xl">
           <Link href="#home" className="flex cursor-pointer items-center gap-2">
-            <span className="text-lg font-bold tracking-wide text-white">KAAST</span>
+            <span className="font-caveat text-lg font-bold tracking-wide text-white">KAAST</span>
           </Link>
 
           <nav
@@ -35,10 +35,10 @@ export function Header() {
 
           <a
             href="#download"
-            aria-label="Download KAAST app"
+            aria-label="Get started with KAAST app"
             className="cursor-pointer rounded-full bg-white px-6 py-2 text-sm font-semibold text-black transition-transform hover:scale-[1.02]"
           >
-            Download
+            Get Started
           </a>
         </div>
       </div>

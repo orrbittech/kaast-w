@@ -1,3 +1,5 @@
+import { KaastText } from "@/components/KaastText";
+
 const STEPS = [
   {
     number: 1,
@@ -27,7 +29,7 @@ export function HowItWorks() {
   return (
     <section id="how-it-works" className="bg-base py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="font-display mb-16 text-center text-3xl font-bold text-white md:text-4xl">
+        <h2 className="mb-16 text-center text-3xl font-bold text-white md:text-4xl">
           How it works
         </h2>
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
@@ -39,11 +41,11 @@ export function HowItWorks() {
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary bg-primary/10 text-xl font-bold text-primary">
                 {step.number}
               </div>
-              <h3 className="font-display mb-2 text-xl font-semibold text-white">
+              <h3 className="mb-2 text-xl font-semibold text-white">
                 {step.title}
               </h3>
-              <p className="font-display text-sm text-zinc-200">
-                {step.description}
+              <p className="text-sm text-zinc-200">
+                <KaastText>{step.description}</KaastText>
               </p>
             </div>
           ))}

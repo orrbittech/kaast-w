@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { KaastText } from "@/components/KaastText";
 
 const FAQ_ITEMS = [
   {
@@ -31,17 +32,7 @@ const FAQ_ITEMS = [
     question: "Is there remote 24/7 support?",
     answer:
       "We offer support to help you get the most out of KAAST. Reach out through the app or our website for assistance.",
-  },
-  {
-    question: "Is KAAST available in South Africa?",
-    answer:
-      "Yes. KAAST is a South African solution built by Orrbit Systems. It is designed for local SMEs with affordable pricing and cloud-based access from mobile, web, and TV.",
-  },
-  {
-    question: "Who developed KAAST?",
-    answer:
-      "KAAST was developed by Brandon N NKawu and is a product of Orrbit Systems, a premier digital solutions provider in South Africa. Contact: 073 959 0288 or LinkedIn.",
-  },
+  }
 ];
 
 export function FAQ() {
@@ -50,7 +41,7 @@ export function FAQ() {
   return (
     <section id="faq" className="bg-base py-24">
       <div className="mx-auto max-w-3xl px-6">
-        <h2 className="font-display mb-12 text-center text-3xl font-bold text-white md:text-4xl">
+        <h2 className="mb-12 text-center text-3xl font-bold text-white md:text-4xl">
           Frequently Asked Questions
         </h2>
         <div className="space-y-4">
@@ -67,8 +58,8 @@ export function FAQ() {
                 aria-controls={`faq-answer-${index}`}
                 id={`faq-question-${index}`}
               >
-                <span className="font-display font-semibold text-white">
-                  {item.question}
+                <span className="font-semibold text-white">
+                  <KaastText>{item.question}</KaastText>
                 </span>
                 <span
                   className={`ml-4 text-2xl text-zinc-200 transition-transform ${
@@ -85,8 +76,8 @@ export function FAQ() {
                   aria-labelledby={`faq-question-${index}`}
                   className="border-t border-zinc-700 px-6 py-4"
                 >
-                  <p className="font-display text-sm text-zinc-200">
-                    {item.answer}
+                  <p className="text-sm text-zinc-200">
+                    <KaastText>{item.answer}</KaastText>
                   </p>
                 </div>
               )}

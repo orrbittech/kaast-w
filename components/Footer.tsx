@@ -4,15 +4,15 @@ export function Footer() {
       <div className="mx-auto max-w-4xl px-6 text-center">
         <a
           href="#download"
-          className="font-display inline-block cursor-pointer rounded-full bg-primary px-10 py-4 text-lg font-semibold text-white transition-colors hover:bg-primary-muted"
+          className="inline-block cursor-pointer rounded-full bg-primary px-10 py-4 text-lg font-semibold text-white transition-colors hover:bg-primary-muted"
         >
-          Start running screens from your phone
+          Start a 30 day free trial
         </a>
-        <p className="font-display mt-6 text-sm text-zinc-300">
-          If you can download apps, you can run KAAST.
+        <p className="mt-6 text-sm text-zinc-300">
+          If you can download apps, you can run <span className="font-caveat">KAAST</span>.
         </p>
-        <p className="font-display mt-3 text-xs text-zinc-400">
-          KAAST is a product of{" "}
+        <p className="mt-3 text-xs text-zinc-400">
+          <span className="font-caveat">KAAST</span> is a product of{" "}
           <a
             href="https://www.orrbit.co.za/"
             target="_blank"
