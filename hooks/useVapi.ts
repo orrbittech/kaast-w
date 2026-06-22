@@ -20,17 +20,20 @@ export function useVapi() {
   const isConfigured = !!assistantId && !!vapi;
 
   useEffect(() => {
-    if (!vapi) return;
+    const client = vapi;
+    if (!client) return;
 
     const onSpeechStart = () => setIsSpeechActive(true);
     const onSpeechEnd = () => setIsSpeechActive(false);
     const onCallStart = () => setCallStatus("active");
     const onCallEnd = () => setCallStatus("inactive");
     const onMessage = (message: { type?: string; role?: string; transcript?: string }) => {
-      if (message.type === "transcript" && message.role && message.transcript) {
+      const role = message.role;
+      const transcript = message.transcript;
+      if (message.type === "transcript" && role && transcript) {
         setMessages((prev) => [
           ...prev,
-          { role: message.role, text: message.transcript },
+          { role, text: transcript },
         ]);
       }
     };
@@ -40,20 +43,20 @@ export function useVapi() {
       console.error("[Vapi]", e);
     };
 
-    vapi.on("speech-start", onSpeechStart);
-    vapi.on("speech-end", onSpeechEnd);
-    vapi.on("call-start", onCallStart);
-    vapi.on("call-end", onCallEnd);
-    vapi.on("message", onMessage);
-    vapi.on("error", onError);
+    client.on("speech-start", onSpeechStart);
+    client.on("speech-end", onSpeechEnd);
+    client.on("call-start", onCallStart);
+    client.on("call-end", onCallEnd);
+    client.on("message", onMessage);
+    client.on("error", onError);
 
     return () => {
-      vapi.off("speech-start", onSpeechStart);
-      vapi.off("speech-end", onSpeechEnd);
-      vapi.off("call-start", onCallStart);
-      vapi.off("call-end", onCallEnd);
-      vapi.off("message", onMessage);
-      vapi.off("error", onError);
+      client.off("speech-start", onSpeechStart);
+      client.off("speech-end", onSpeechEnd);
+      client.off("call-start", onCallStart);
+      client.off("call-end", onCallEnd);
+      client.off("message", onMessage);
+      client.off("error", onError);
     };
   }, []);
 

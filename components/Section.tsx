@@ -32,9 +32,9 @@ export function Section() {
       className="relative overflow-hidden bg-base py-12"
     >
       <div className="mx-auto max-w-7xl px-6">
-        <div className="relative flex min-h-[700px] items-center justify-center">
+        <div className="relative flex min-h-0 items-center justify-center md:min-h-[700px]">
           {/* Central phone mockup */}
-          <div className="relative z-10">
+          <div className="relative z-10 hidden md:flex">
             <div className="flex h-[520px] w-[280px] flex-col overflow-hidden rounded-[2.5rem] border-4 border-primary/30 bg-zinc-950 shadow-2xl">
               <div className="flex flex-1 items-center justify-center p-4">
                 <span className="font-caveat text-4xl font-semibold text-primary">

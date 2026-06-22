@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
-import { Urbanist, Caveat } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
+import { Urbanist, Caveat, Geist } from "next/font/google";
+import { clerkAppearance } from "@/lib/clerk-appearance";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const urbanist = Urbanist({
   weight: ["400", "500", "600"],
@@ -136,7 +141,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-ZA"
-      className={`${urbanist.variable} ${caveat.variable}`}
+      className={cn(urbanist.variable, caveat.variable, "font-sans", geist.variable)}
     >
       <head>
         <script
@@ -145,7 +150,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
-        {children}
+        <ClerkProvider appearance={clerkAppearance}>{children}</ClerkProvider>
       </body>
     </html>
   );

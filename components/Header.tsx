@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ROUTES } from "@/lib/routes";
 
 const NAV_LINKS = [
   { href: "#home", label: "Home" },
@@ -14,7 +15,7 @@ export function Header() {
     <header className="fixed top-4 left-0 right-0 z-50">
       <div className="mx-auto max-w-5xl px-6">
         <div className="flex h-16 items-center justify-between rounded-full border border-zinc-800 bg-black px-6 shadow-xl">
-          <Link href="#home" className="flex cursor-pointer items-center gap-2">
+          <Link href={ROUTES.home} className="flex cursor-pointer items-center gap-2">
             <span className="font-caveat text-lg font-bold tracking-wide text-white">KAAST</span>
           </Link>
 
@@ -33,13 +34,13 @@ export function Header() {
             ))}
           </nav>
 
-          <a
-            href="#download"
+          <Link
+            href={ROUTES.signUp}
             aria-label="Get started with KAAST app"
             className="cursor-pointer rounded-full bg-white px-6 py-2 text-sm font-semibold text-black transition-transform hover:scale-[1.02]"
           >
             Get Started
-          </a>
+          </Link>
         </div>
       </div>
     </header>
