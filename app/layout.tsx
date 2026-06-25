@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Urbanist, Caveat } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { BillingStatusProvider } from "@/lib/context/billing-status-provider";
 import { clerkAppearance } from "@/lib/clerk-appearance";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -157,7 +158,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ClerkProvider appearance={clerkAppearance}>{children}</ClerkProvider>
+          <ClerkProvider appearance={clerkAppearance}>
+            <BillingStatusProvider>{children}</BillingStatusProvider>
+          </ClerkProvider>
         </ThemeProvider>
       </body>
     </html>

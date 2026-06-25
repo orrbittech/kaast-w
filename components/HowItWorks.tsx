@@ -4,24 +4,24 @@ const STEPS = [
   {
     number: 1,
     title: "Sign up",
-    description: "Create a free KAAST account in seconds",
+    description: "Start your free trial on kaast.app",
   },
   {
     number: 2,
-    title: "Add your device",
+    title: "Connect screens",
     description:
-      "Set up smart or compatible TVs with the KAAST TV Player app installed",
+      "Download KAAST on iOS or Android, install KAAST TV on every screen, and pair with the 6-digit code from the TV",
   },
   {
     number: 3,
-    title: "Download the app",
-    description: "Install KAAST on your phone to control those TV Player apps",
+    title: "Add content",
+    description:
+      "Upload video, images, or audio and build a playlist for each screen",
   },
   {
     number: 4,
-    title: "Control from your phone",
-    description:
-      "Control every screen from your fingertips and keep your brand locked in across locations",
+    title: "Go live",
+    description: "Push a playlist to any TV from your phone",
   },
 ];
 
@@ -30,7 +30,7 @@ export function HowItWorks() {
     <section id="how-it-works" className="bg-base py-24">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="mb-16 text-center text-3xl font-bold text-white md:text-4xl">
-          How it works
+          How to Kaast
         </h2>
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {STEPS.map((step) => (

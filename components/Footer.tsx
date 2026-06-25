@@ -25,14 +25,6 @@ export function Footer() {
             Orrbit Systems
           </a>
           .{" "}
-          <a
-            href="https://x.com/orrbittech"
-            target="_blank"
-            rel="noreferrer"
-            className="cursor-pointer text-primary hover:underline"
-          >
-            X
-          </a>
         </p>
         <nav
           aria-label="Legal"

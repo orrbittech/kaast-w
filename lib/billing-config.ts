@@ -1,20 +1,3 @@
-function parseCommaSeparatedSlugs(raw: string | undefined, envName: string): string[] {
-  if (!raw?.trim()) {
-    throw new Error(`${envName} is required`);
-  }
-
-  const slugs = raw
-    .split(",")
-    .map((slug) => slug.trim())
-    .filter(Boolean);
-
-  if (slugs.length === 0) {
-    throw new Error(`${envName} must contain at least one plan slug`);
-  }
-
-  return slugs;
-}
-
 function requireEnv(name: string): string {
   const value = process.env[name]?.trim();
   if (!value) {
@@ -23,19 +6,43 @@ function requireEnv(name: string): string {
   return value;
 }
 
-export const orgPlanSlugs = parseCommaSeparatedSlugs(
-  process.env.NEXT_PUBLIC_CLERK_ORG_PLAN_SLUGS,
-  "NEXT_PUBLIC_CLERK_ORG_PLAN_SLUGS",
-);
-
 export const billingUrl = requireEnv("NEXT_PUBLIC_BILLING_URL");
+
+const ACTIVE_SUBSCRIPTION_STATUSES = new Set(["active", "past_due"]);
+
+/** JWT `pla` claim uses `o:org:starter` while Clerk plan slugs use `org:starter`. */
+export function licenseToOrgPlanSlug(license: string | null | undefined): string | null {
+  if (!license) return null;
+  const match = license.match(/^o:(org:.+)$/);
+  return match?.[1] ?? null;
+}
+
+export function hasActiveOrgPlanInLicense(license: string | null | undefined): boolean {
+  return licenseToOrgPlanSlug(license) !== null;
+}
+
+export function isActiveClerkSubscriptionStatus(
+  status: string | null | undefined,
+): boolean {
+  if (!status) return false;
+  return ACTIVE_SUBSCRIPTION_STATUSES.has(status);
+}
+
+/** Human-readable label from a Clerk org plan slug (e.g. `org:starter` → `Starter`). */
+export function formatPlanDisplayName(slug: string | null | undefined): string {
+  if (!slug) return 'No plan';
+  const name = slug.replace(/^org:/, '');
+  if (!name) return 'No plan';
+  return name.charAt(0).toUpperCase() + name.slice(1);
+}
 
 type HasPlanFn = (params: { plan: string }) => boolean;
 
-export function hasAnyOrgPlan(
+/** Check JWT plan entitlement against slugs returned from Clerk (via API or server). */
+export function hasAnyOrgPlanFromSlugs(
   has: HasPlanFn | undefined,
-  slugs: string[] = orgPlanSlugs,
+  slugs: string[],
 ): boolean {
-  if (!has) return false;
+  if (!has || slugs.length === 0) return false;
   return slugs.some((slug) => has({ plan: slug }));
 }

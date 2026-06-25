@@ -6,9 +6,10 @@ import { ROUTES } from "@/lib/routes";
 
 const NAV_LINKS = [
   { href: "#home", label: "Home" },
-  { href: "#features", label: "Features" },
-  { href: "#how-it-works", label: "How it works" },
+  { href: "#how-to-kaast", label: "How Kaast Works" },
+  { href: "#how-it-works", label: "How to Kaast" },
   { href: "#faq", label: "FAQ" },
+  { href: "#pricing", label: "Pricing" },
 ];
 
 export function Header() {

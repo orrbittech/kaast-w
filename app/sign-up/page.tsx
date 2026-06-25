@@ -1,15 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import {
-  PricingTable,
-  SignUp,
-  useAuth,
-  useOrganizationList,
-} from "@clerk/nextjs";
+import { SignUp, useAuth, useOrganizationList } from "@clerk/nextjs";
+import { ClerkOrgPricingTable } from "@/components/ClerkOrgPricingTable";
 import { AuthShell } from "@/components/AuthShell";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,10 +25,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { clerkAppearance } from "@/lib/clerk-appearance";
 import { authButtonClass, authFieldClass } from "@/lib/auth-form-styles";
+import { useActiveOrgSubscription } from "@/lib/hooks/use-active-org-subscription";
 import { ROUTES, TRIAL_DAYS } from "@/lib/routes";
 import { cn } from "@/lib/utils";
-
-const highlightedPlan = process.env.NEXT_PUBLIC_CLERK_HIGHLIGHTED_PLAN;
 
 const orgNameSchema = z.object({
   orgName: z
@@ -42,6 +38,60 @@ const orgNameSchema = z.object({
 });
 
 type OrgNameFormValues = z.infer<typeof orgNameSchema>;
+
+const POLL_INTERVAL_MS = 15_000;
+
+function PlanSelectionStep() {
+  const router = useRouter();
+  const {
+    hasActivePlan,
+    isLoading,
+    refetchBillingStatus,
+  } = useActiveOrgSubscription();
+  const [activating, setActivating] = useState(false);
+
+  useEffect(() => {
+    if (hasActivePlan) {
+      router.replace(ROUTES.welcome);
+    }
+  }, [hasActivePlan, router]);
+
+  useEffect(() => {
+    if (hasActivePlan) return;
+
+    const interval = setInterval(() => {
+      setActivating(true);
+      void refetchBillingStatus({ fresh: true }).finally(() =>
+        setActivating(false),
+      );
+    }, POLL_INTERVAL_MS);
+
+    return () => clearInterval(interval);
+  }, [hasActivePlan, refetchBillingStatus]);
+
+  if (hasActivePlan) {
+    return (
+      <p className="text-center text-muted-foreground">
+        Plan activated — redirecting...
+      </p>
+    );
+  }
+
+  return (
+    <div className="w-full space-y-4">
+      <p className="text-center text-sm text-zinc-400">
+        Select the free plan to start your trial, or complete checkout on a paid
+        plan to continue.
+      </p>
+      {isLoading || activating ? (
+        <p className="text-center text-xs text-zinc-500">
+          {activating ? "Activating your plan..." : "Loading plans..."}
+        </p>
+      ) : null}
+      <ClerkOrgPricingTable newSubscriptionRedirectUrl={ROUTES.welcome} />
+    </div>
+  );
+}
 
 function OrgSetupStep() {
   const { orgId } = useAuth();
@@ -58,14 +108,7 @@ function OrgSetupStep() {
   });
 
   if (orgId) {
-    return (
-      <PricingTable
-        for="organization"
-        appearance={clerkAppearance}
-        newSubscriptionRedirectUrl={ROUTES.welcome}
-        {...(highlightedPlan ? { highlightedPlan } : {})}
-      />
-    );
+    return <PlanSelectionStep />;
   }
 
   if (!isLoaded) {
@@ -172,12 +215,14 @@ function OrgSetupStep() {
 }
 
 export default function SignUpPage() {
-  const { isLoaded, isSignedIn } = useAuth();
+  const { isLoaded, isSignedIn, orgId } = useAuth();
+  const isPlanSelection = isSignedIn && Boolean(orgId);
 
   return (
     <AuthShell
       title={`Start your ${TRIAL_DAYS}-day free trial`}
       subtitle="Manage media across all your locations — sign up, create your organization, and choose a plan."
+      contentMaxWidth={isPlanSelection ? "max-w-7xl" : "max-w-lg"}
     >
       {!isLoaded ? (
         <p className="text-center text-muted-foreground">Loading...</p>

@@ -24,3 +24,14 @@ export const clerkAppearance = {
     footerActionLink: "text-primary hover:text-primary-muted",
   },
 };
+
+/** PricingTable-only appearance: three cards in one row on md+, stacked on mobile. */
+export const clerkPricingTableAppearance = {
+  ...clerkAppearance,
+  elements: {
+    ...clerkAppearance.elements,
+    pricingTable: "grid w-full grid-cols-1 gap-4 md:grid-cols-3",
+    pricingTableCard: "h-full min-w-0 flex flex-col",
+    pricingTableCardBody: "flex-1",
+  },
+};
